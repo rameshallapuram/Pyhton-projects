@@ -17,10 +17,11 @@ def deal():
     return card
 
 def calculate_score(cards):
+    """ Calculates the sum of cards in the list """
     sum(cards)
     if sum(cards) == 21 and len(cards) == 2:
         return 21
-
+    #to replace 11 in the card_list if the sum of cards in the player list exceeds 11
     if 11 in cards and sum(cards) > 11:
         cards.remove(11)
         cards.append(1)
@@ -28,6 +29,7 @@ def calculate_score(cards):
 
 
 def compare(user_score, dealer_score):
+    """ Compares the scores of the inputs passed """
     if user_score > 21 and dealer_score > 21:
         return "You went over. You lose"
     elif user_score == dealer_score:
@@ -59,7 +61,7 @@ def game():
         user_score = calculate_score(user_hand)
         dealer_score = calculate_score(dealer_hand)
         print(f"   Your cards: {user_hand}, current score: {user_score}")
-        print(f"   Computer's first card: {dealer_hand[0]}")
+        print(f"   dealers's first card: {dealer_hand[0]}")
 
         if user_score == 21 or dealer_score == 21 or user_score > 21:
             game_over = True
