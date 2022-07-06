@@ -21,7 +21,7 @@ def calculate_score(cards):
     if sum(cards) == 21 and len(cards) == 2:
         return 21
 
-    if 11 in cards and sum(cards) > 21:
+    if 11 in cards and sum(cards) > 11:
         cards.remove(11)
         cards.append(1)
     return sum(cards) 
@@ -58,23 +58,22 @@ def game():
     while not game_over:
         user_score = calculate_score(user_hand)
         dealer_score = calculate_score(dealer_hand)
-        print(f"user hand is {user_hand} and the score is {user_score}.")
-        print(f"Dealer's first hand is {dealer_hand[0]}.")
+        print(f"   Your cards: {user_hand}, current score: {user_score}")
+        print(f"   Computer's first card: {dealer_hand[0]}")
 
         if user_score == 21 or dealer_score == 21 or user_score > 21:
             game_over = True
         else:
-            user_choice = input("Do you want to pick a card or stand? 'p' or 's': ").lower()
-            if user_choice == "s":
-                game_over = True
-            else:
+            user_should_deal = input("Type 'y' to get another card, type 'n' to pass: ")
+            if user_should_deal == "y":
                 user_hand.append(deal())
-                user_score = calculate_score(user_hand)
-    
-    while dealer_score != 21 or dealer_score < 17:
+            else:
+                game_over = True
+
+    while dealer_score != 21 and dealer_score < 17:
         dealer_hand.append(deal())
         dealer_score = calculate_score(dealer_hand)
-
+    
     print(f"Your final hand is {user_hand} and final score is {user_score}.")
     print(f"Dealer's final hand is {dealer_hand} and final score is {dealer_score}.")
     print(compare(user_score, dealer_score))
@@ -85,15 +84,3 @@ while input("Do you want to play? 'yes' or 'no'") == "yes":
 else:
     game_over = True
     print("Thank you playing. Bye!")
-
-
-
-    
-
-
-
-
-
-
-
-        
